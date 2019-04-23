@@ -1,7 +1,8 @@
 import {
     app,
     BrowserWindow,
-    ipcMain
+    ipcMain,
+    shell
 } from 'electron'
 
 import {
@@ -11,6 +12,8 @@ import {
 import {
     AlbumServiceImpl
 } from './service/AlbumServiceImpl.ts'
+
+import '../renderer/store'
 
 /**
  * Set `__static` path to static files in production
@@ -32,7 +35,12 @@ function createWindow() {
     mainWindow = new BrowserWindow({
         height: 563,
         useContentSize: true,
-        width: 1000
+        width: 1000,
+        minWidth: 400,
+        minHeight: 300,
+        webPreferences: {
+            webSecurity: false
+        }
     })
 
     mainWindow.loadURL(winURL)
@@ -40,6 +48,12 @@ function createWindow() {
     mainWindow.on('closed', () => {
         mainWindow = null
     })
+
+    // Hook new window, and open url in Browser
+    mainWindow.webContents.on('new-window', function(event, url) {
+        event.preventDefault();
+        shell.openExternal(url);
+    });
 }
 
 app.on('ready', createWindow)

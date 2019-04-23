@@ -1,0 +1,1 @@
+export const SET_STRING = 'SET_STRING'

@@ -1,159 +1,213 @@
 <template>
   <div ref="home" class="home">
     <div class="content">
-      <h1>拖拽文件夹到此处</h1>
-      <a class="button" @click="selectAlbumDir">选择文件夹</a>
+      <h1>{{ string.dropDir }}</h1>
+      <a class="button" @click="selectAlbumDir">{{ string.openDir }}</a>
     </div>
     <div class="ehunter-tag">EHUNTER</div>
+    <ul class="lang-selector">
+      <li v-for="lang of langList" :key="lang.name" @click="selectLang(lang.val)">{{ lang.name }}</li>
+    </ul>
   </div>
 </template>
 
 <script>
-import { ipcRenderer } from "electron";
-import { AlbumServiceImpl } from "../../main/service/AlbumServiceImpl.ts";
-const { dialog } = require("electron").remote;
+import { mapGetters, mapActions } from 'vuex';
+import { ipcRenderer } from 'electron';
+import { AlbumServiceImpl } from '../../main/service/AlbumServiceImpl.ts';
+import * as tags from '../assets/tags.js';
+const { dialog } = require('electron').remote;
 
 export default {
-  name: "Home",
-  data() {
-    return {
-      dir: ""
-    };
-  },
-
-  mounted() {
-    this.initDrop();
-    this.initMsgListener();
-  },
-
-  methods: {
-    selectAlbumDir() {
-      this.dir = dialog.showOpenDialog({
-        properties: ["openDirectory"]
-      })[0];
+    name: 'Home',
+    data() {
+        return {
+            dir: '',
+            langList: [
+                { name: '简体中文', val: tags.LANG_CN },
+                { name: 'English', val: tags.LANG_EN },
+                { name: '日本語', val: tags.LANG_JP }
+            ]
+        };
     },
 
-    initDrop() {
-      let blockedCb = e => {
-        e.preventDefault();
-        e.stopPropagation();
-      };
-      this.$refs.home.addEventListener("dragenter", blockedCb, false);
-      this.$refs.home.addEventListener("dragover", blockedCb, false);
-      this.$refs.home.addEventListener("dragleave", blockedCb, false);
-      this.$refs.home.addEventListener(
-        "drop",
-        e => {
-          // 阻止默认动作（如打开一些元素的链接）
-          event.preventDefault();
-          console.log(event.dataTransfer.files[0]);
-          ipcRenderer.send(
-            "SELECT_ALBUM_DIR",
-            event.dataTransfer.files[0].path
-          );
+    created() {
+        this.initLang();
+    },
+
+    mounted() {
+        this.initDrop();
+        this.initMsgListener();
+    },
+
+    computed: {
+        ...mapGetters(['string'])
+    },
+
+    methods: {
+        ...mapActions(['setString']),
+        selectAlbumDir() {
+            let dir = dialog.showOpenDialog({
+                properties: ['openDirectory']
+            })[0];
+            ipcRenderer.send('SELECT_ALBUM_DIR', dir);
         },
-        false
-      );
-    },
 
-    initMsgListener() {
-      ipcRenderer.on("ALBUM_DATA", async (event, data) => {
-        this.$router.push({ name: "Reader", params: { albumData: data } });
-      });
-      ipcRenderer.on("ERROR", (event, msg) => {
-        switch (msg) {
-          case "ERROR_NO_DIR":
-            dialog.showErrorBox("Error", "No directory");
-            break;
-          case "NO_IMG":
-            dialog.showErrorBox(
-              "Error",
-              "No image in the directory(*.jpg, *.png)"
+        initDrop() {
+            let blockedCb = e => {
+                e.preventDefault();
+                e.stopPropagation();
+            };
+            this.$refs.home.addEventListener('dragenter', blockedCb, false);
+            this.$refs.home.addEventListener('dragover', blockedCb, false);
+            this.$refs.home.addEventListener('dragleave', blockedCb, false);
+            this.$refs.home.addEventListener(
+                'drop',
+                e => {
+                    // 阻止默认动作（如打开一些元素的链接）
+                    event.preventDefault();
+                    ipcRenderer.send('SELECT_ALBUM_DIR', event.dataTransfer.files[0].path);
+                },
+                false
             );
-            break;
-          default:
-            dialog.showErrorBox("Error", data);
+        },
+
+        initMsgListener() {
+            ipcRenderer.on('ALBUM_DATA', async (event, data) => {
+                this.$router.push({ name: 'Reader', params: { albumData: data } });
+            });
+            ipcRenderer.on('ERROR', (event, msg) => {
+                console.log(this.string.noDir);
+                switch (msg) {
+                    case 'ERROR_NO_DIR':
+                        dialog.showErrorBox(this.string.error, this.string.noDir);
+                        break;
+                    case 'NO_IMG':
+                        dialog.showErrorBox(this.string.error, this.string.noImg);
+                        break;
+                    default:
+                        dialog.showErrorBox('Error', data);
+                }
+            });
+        },
+
+        initLang() {
+            let langCode = window.localStorage.getItem('lang');
+            if (langCode) {
+                this.setString(langCode);
+            }
+        },
+
+        selectLang(langCode) {
+            window.localStorage.setItem('lang', langCode);
+            this.setString(langCode);
         }
-      });
     }
-  }
 };
 </script>
 
 <style>
 body {
-  margin: 0;
-  font-family: PingFang SC, Microsoft YaHei, 微软雅黑, Arial, Hiragino Sans GB,
-    Heiti SC, Droid Sans, WenQuanYi Micro Hei, sans-serif !important;
+    margin: 0;
+    background: #333333;
+    font-family: PingFang SC, Microsoft YaHei, 微软雅黑, Arial, Hiragino Sans GB, Heiti SC, Droid Sans,
+        WenQuanYi Micro Hei, sans-serif !important;
 }
 </style>
 
 <style lang="scss" scoped>
 .home {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: #333333;
-  overflow: hidden;
-  position: relative;
-  height: 100vh;
-  > .content {
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
-    margin-bottom: 50px;
-    color: rgba(255, 255, 255, 0.3);
-    h1 {
-      font-size: 24px;
-      font-weight: bold;
+    background: #333333;
+    overflow: hidden;
+    position: relative;
+    height: 100vh;
+    > .content {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        margin-bottom: 50px;
+        color: rgba(255, 255, 255, 0.3);
+        h1 {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .button {
+            transition: all 0.2s ease;
+            color: #eee;
+            font-size: 14px;
+            text-align: center;
+            text-transform: uppercase;
+            cursor: pointer;
+            user-select: none;
+            outline: none;
+            margin: 8px;
+            border-radius: 10px;
+            line-height: 36px;
+            background-color: hsl(122, 39, 49);
+            font-size: 14px;
+            min-width: 88px;
+            height: 36px;
+            line-height: 36px;
+            border-radius: 2px;
+            box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14),
+                0 1px 5px 0 rgba(0, 0, 0, 0.12);
+            display: inline-block;
+            overflow: hidden;
+            position: relative;
+            transition-timing-function: cubic-bezier(0.23, 1, 0.32, 1);
+            text-decoration: none;
+            text-align: center;
+            border: none;
+            padding: 0 10px;
+            &:hover {
+                background-color: hsl(122, 39, 57);
+            }
+            &:active {
+                background-color: hsl(122, 39, 44);
+            }
+        }
     }
-    .button {
-      transition: all 0.2s ease;
-      color: #eee;
-      font-size: 14px;
-      text-align: center;
-      text-transform: uppercase;
-      cursor: pointer;
-      user-select: none;
-      outline: none;
-      margin: 8px;
-      border-radius: 10px;
-      line-height: 36px;
-      background-color: hsl(122, 39, 49);
-      font-size: 14px;
-      min-width: 88px;
-      height: 36px;
-      line-height: 36px;
-      border-radius: 2px;
-      box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2),
-        0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
-      display: inline-block;
-      overflow: hidden;
-      position: relative;
-      transition-timing-function: cubic-bezier(0.23, 1, 0.32, 1);
-      text-decoration: none;
-      text-align: center;
-      border: none;
-      padding: 0 10px;
-      &:hover {
-        background-color: hsl(122, 39, 57);
-      }
-      &:active {
-        background-color: hsl(122, 39, 44);
-      }
+    .ehunter-tag {
+        position: absolute;
+        right: 8vh;
+        bottom: 8vh;
+        padding: 1vh 10vh;
+        background: #4caf50;
+        color: white;
+        font-size: 1.8vh;
+        transform-origin: center;
+        transform: translate(50%, 50%) rotate(-45deg);
     }
-  }
-  .ehunter-tag {
-    position: absolute;
-    right: 8vh;
-    bottom: 8vh;
-    padding: 1vh 10vh;
-    background: #4caf50;
-    color: white;
-    font-size: 1.8vh;
-    transform-origin: center;
-    transform: translate(50%, 50%) rotate(-45deg);
-  }
+
+    .lang-selector {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: row;
+        margin: 0;
+        padding: 0;
+        > li {
+            display: flex;
+            font-size: 12px;
+            transition: all 0.2s ease;
+            color: rgba(255, 255, 255, 0.3);
+            padding: 10px;
+            user-select: none;
+            cursor: pointer;
+            &:hover {
+                color: rgba(255, 255, 255, 1);
+            }
+            &:active {
+                color: rgba(255, 255, 255, 0.7);
+            }
+        }
+    }
 }
 </style>

@@ -32,7 +32,7 @@ export class AlbumServiceImpl extends AlbumService {
             let id = fileItems[i].name;
             let index = i;
             let pageUrl = fileItems[i].path;
-            let src = path.join('file:///', fileItems[i].path);
+            let src = 'file://' + fileItems[i].path.replace(/\s/g, '%20');
             let dimensions = await sizeOf(fileItems[i].path);
             let heightOfWidth = dimensions.height / dimensions.width;
             this.imgPageInfos.push({ id, index, pageUrl, src, heightOfWidth });

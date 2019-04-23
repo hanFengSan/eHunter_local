@@ -1,6 +1,6 @@
 <template>
   <div class="app normalize">
-    <transition name="slow-horizontal-fade">
+    <transition name="slow-horizontal-fade" v-if="!disableLoading">
       <loading-view v-if="!isDone && !isFailed" class="loading-view"></loading-view>
     </transition>
     <transition name="slow-horizontal-fade">
@@ -52,7 +52,7 @@ import Utils from './utils/Utils.ts';
 export default {
     name: 'InjectedApp',
 
-    inject: ['config', 'service'],
+    inject: ['config', 'service', 'disableLoading'],
 
     components: {
         ThumbScrollView,

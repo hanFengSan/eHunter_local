@@ -1,0 +1,80 @@
+{
+    "cn":{
+        "title":"新版本: v2.3.1",
+        "version":"2.3.1",
+        "text":"修复bug",
+        "time":1543811938814,
+        "duration":604800000,
+        "always":true,
+        "operations":[
+            {
+                "name":"Chrome应用商店",
+                "url":"https://chrome.google.com/webstore/detail/ehunter-more-powerful-e-h/dnnicnedpmjkbkdeijccbjkkcpcbmdoo"
+            },
+            {
+                "name":"油猴",
+                "url":"https://greasyfork.org/zh-CN/scripts/39198-ehunter"
+            },
+            {
+                "name":"Firefox",
+                "url":"https://addons.mozilla.org/zh-CN/firefox/addon/ehunter/"
+            },
+            {
+                "name":"crx/xpi下载",
+                "url":"https://pan.baidu.com/s/1YTONumJwAAHMPpUfcyqkhg"
+            }
+        ]
+    },
+    "en":{
+        "title":"New version: v2.3.1",
+        "version":"2.3.1",
+        "text":"Fix bugs",
+        "time":1543811938814,
+        "duration":604800000,
+        "always":true,
+        "operations":[
+            {
+                "name":"Chrome Web Store",
+                "url":"https://chrome.google.com/webstore/detail/ehunter-more-powerful-e-h/dnnicnedpmjkbkdeijccbjkkcpcbmdoo"
+            },
+            {
+                "name":"Tampermonkey",
+                "url":"https://greasyfork.org/zh-CN/scripts/39198-ehunter"
+            },
+            {
+                "name":"Firefox",
+                "url":"https://addons.mozilla.org/zh-CN/firefox/addon/ehunter/"
+            },
+            {
+                "name":"crx/xpi download",
+                "url":"https://pan.baidu.com/s/1YTONumJwAAHMPpUfcyqkhg"
+            }
+        ]
+    },
+    "jp":{
+        "title":"新しいバージョン: v2.3.1",
+        "version":"2.3.1",
+        "text":"Fix bugs",
+        "time":1543811938814,
+        "duration":604800000,
+        "always":true,
+        "operations":[
+            {
+                "name":"Chrome Web Store",
+                "url":"https://chrome.google.com/webstore/detail/ehunter-more-powerful-e-h/dnnicnedpmjkbkdeijccbjkkcpcbmdoo"
+            },
+            {
+                "name":"Tampermonkey",
+                "url":"https://greasyfork.org/zh-CN/scripts/39198-ehunter"
+            },
+            {
+                "name":"Firefox",
+                "url":"https://addons.mozilla.org/zh-CN/firefox/addon/ehunter/"
+            },
+            {
+                "name":"crx/xpi downloadダウンロード",
+                "url":"https://pan.baidu.com/s/1YTONumJwAAHMPpUfcyqkhg"
+            }
+        ]
+    }
+}
