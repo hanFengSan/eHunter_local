@@ -52,13 +52,20 @@ export default {
     methods: {
         ...mapActions(['setString']),
         selectAlbumDir() {
-            let dir = dialog.showOpenDialog({
+            let openDirectory = dialog.showOpenDialog({
                 properties: ['openDirectory']
-            })[0];
-            ipcRenderer.send('SELECT_ALBUM_DIR', dir);
+            });
+            if (openDirectory) {
+                let dir = openDirectory[0];
+                ipcRenderer.send('SELECT_ALBUM_DIR', dir);
+            }
         },
 
         initDrop() {
+            this.$refs.home.ondragenter = this.$refs.home.ondragover = this.$refs.home.ondragleave = e => {
+                e.preventDefault();
+                e.stopPropagation();
+            }
             this.$refs.home.addEventListener('drop', this.listenDrop, false);
         },
 
@@ -76,7 +83,6 @@ export default {
                 this.$router.push({ name: 'CoreApp', params: { albumData: data } });
             });
             ipcRenderer.on('ERROR', (event, msg) => {
-                console.log(this.string.noDir);
                 switch (msg) {
                     case 'ERROR_NO_DIR':
                         dialog.showErrorBox(this.string.error, this.string.noDir);
@@ -85,7 +91,7 @@ export default {
                         dialog.showErrorBox(this.string.error, this.string.noImg);
                         break;
                     default:
-                        dialog.showErrorBox('Error', data);
+                        dialog.showErrorBox('Error', msg);
                 }
             });
         },

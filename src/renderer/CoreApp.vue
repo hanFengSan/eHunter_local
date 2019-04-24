@@ -1,5 +1,5 @@
 <template>
-  <div class="app normalize vue-container">
+  <div ref="coreApp" class="app normalize vue-container">
     <transition name="slow-horizontal-fade" v-if="!disableLoading">
       <loading-view v-if="!isDone && !isFailed" class="loading-view"></loading-view>
     </transition>
@@ -68,7 +68,6 @@ export default {
                 showEHunterView: () => this.$router.go(-1)
             }
         };
-        console.log(service.album);
         return {
             service,
             config,
@@ -127,6 +126,13 @@ export default {
         );
         await this.checkInstructions();
         this.checkVersion();
+    },
+
+    mounted() {
+        this.$refs.coreApp.ondragenter = this.$refs.coreApp.ondragover = this.$refs.coreApp.ondragleave = this.$refs.coreApp.ondrop = e => {
+            e.preventDefault();
+            e.stopPropagation();
+        }
     },
 
     computed: {

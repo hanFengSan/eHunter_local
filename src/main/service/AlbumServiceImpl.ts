@@ -11,6 +11,8 @@ const ImageSize = require('image-size');
 const stat = util.promisify(fs.stat);
 const readdir = util.promisify(fs.readdir);
 const sizeOf = util.promisify(ImageSize);
+const fileUrl = require('file-url');
+const CSSEscape = require('css.escape');
 
 export class AlbumServiceImpl extends AlbumService {
     private imgPageInfos: Array<ImgPageInfo> = [];
@@ -32,11 +34,11 @@ export class AlbumServiceImpl extends AlbumService {
             let id = fileItems[i].name;
             let index = i;
             let pageUrl = fileItems[i].path;
-            let src = 'file://' + fileItems[i].path.replace(/\s/g, '%20');
+            let src = fileUrl(fileItems[i].path);
             let dimensions = await sizeOf(fileItems[i].path);
             let heightOfWidth = dimensions.height / dimensions.width;
             this.imgPageInfos.push({ id, index, pageUrl, src, heightOfWidth });
-            this.thumbInfos.push({ id, src, mode: ThumbMode.IMG });
+            this.thumbInfos.push({ id, src: CSSEscape(src), mode: ThumbMode.IMG });
         }
         this.title = path.basename(dirPath);
     }

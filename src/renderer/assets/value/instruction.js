@@ -29,8 +29,6 @@ eHunter-local是eHunter的本地版本. eHunter本身是浏览器插件, 支持e
 * 版本: $$VERSION$$
 * 作者: Alex Chen (hanFeng)
 * 项目开源地址: [Github]($$HOME_PAGE$$)
-
-如果你喜欢此插件的话,希望能在应用商店上给个好评 8-)
 `,
     en: `
 1.Change language/切换语言/言語を変更
@@ -62,8 +60,6 @@ The eHunter-local is local version of eHunter. The eHunter is browser plugin, su
 * Version: $$VERSION$$
 * Author: Alex Chen (hanFeng)
 * Home page of this project: [Github]($$HOME_PAGE$$)
-
-If you like this extension, I hope you can give a five-star rating in store. 8-)
 `,
     jp: `
 1.Change language/切换语言/言語を変更
@@ -95,7 +91,5 @@ eHunter-localはeHunterのローカル版です。eHunterは、ehentaiとnhentai
 * バージョン: $$VERSION$$
 * 著者: Alex Chen (hanFeng)
 * このプロジェクトのホームページ: [Github]($$HOME_PAGE$$)
-
-この拡張機能が気に入ったら、お店で5つ星の評価をつけてください。 8-)
 `
 }

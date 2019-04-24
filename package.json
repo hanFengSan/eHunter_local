@@ -28,7 +28,8 @@
             "dist/electron/**/*"
         ],
         "dmg": {
-            "contents": [{
+            "contents": [
+                {
                     "x": 410,
                     "y": 150,
                     "type": "link",
@@ -45,6 +46,7 @@
             "icon": "build/icons/icon.icns"
         },
         "win": {
+            "target": "portable",
             "icon": "build/icons/icon.ico"
         },
         "linux": {
@@ -52,20 +54,22 @@
         }
     },
     "dependencies": {
+        "@babel/polyfill": "^7.4.3",
         "axios": "^0.18.0",
+        "css.escape": "^1.5.1",
+        "file-url": "^3.0.0",
         "image-size": "^0.7.3",
+        "markdown-it": "^8.4.2",
+        "markdown-it-emoji": "^1.4.0",
+        "react-native-storage": "0.2.2",
         "ts-loader": "^5.3.3",
+        "twemoji": "^12.0.1",
         "typescript": "^3.4.4",
         "vue": "^2.5.16",
         "vue-electron": "^1.0.6",
         "vue-router": "^3.0.1",
         "vuex": "^3.0.1",
-        "vuex-electron": "^1.0.0",
-        "markdown-it": "^8.4.2",
-        "markdown-it-emoji": "^1.4.0",
-        "react-native-storage": "0.2.2",
-        "twemoji": "^12.0.1",
-        "@babel/polyfill": "^7.4.3"
+        "vuex-electron": "^1.0.0"
     },
     "devDependencies": {
         "ajv": "^6.5.0",
