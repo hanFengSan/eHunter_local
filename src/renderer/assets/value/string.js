@@ -70,9 +70,9 @@ export default {
         jp: '積載量'
     },
     loadNumTip: {
-        cn: '越大则对网络质量要求越高',
-        en: 'The greater quantity, the higher requirement of network quality',
-        jp: '数字が大きいほど、ネットワーク品質の要件が高くなります'
+        cn: '越大则内存占用越高',
+        en: 'The greater quantity, the higher usage of Memory',
+        jp: '量が多いほど、メモリの使用量は多くなります'
     },
     volSize: {
         cn: '分卷页数',
@@ -250,9 +250,9 @@ export default {
         jp: '全画面表示'
     },
     closeEHunter: {
-        cn: '关闭eHunter',
-        en: 'Close eHunter',
-        jp: 'eHunter閉じる'
+        cn: '返回 [Q]',
+        en: 'Return [Q]',
+        jp: '返す [Q]'
     },
     toggleTopBar: {
         cn: '显示/隐藏顶栏 [Esc]',

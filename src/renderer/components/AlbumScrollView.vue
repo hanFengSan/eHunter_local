@@ -265,6 +265,10 @@ export default {
                 case 'Escape':
                     this.toggleTopBar(!this.showTopBar);
                     break;
+                case 'q':
+                case 'Q':
+                    this.$router.go(-1);
+                    break;
             }
         }
     }
