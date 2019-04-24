@@ -10,6 +10,7 @@ eHunter_local is local version of [eHunter](https://github.com/hanFengSan/eHunte
 
 ### Download
 [Github Release](https://github.com/hanFengSan/eHunter_local/releases)
+
 [百度网盘](https://pan.baidu.com/s/1wEnBe9uGoBKzNd4DCfbuAg) 提取码: czft
 
 ### Build Setup
