@@ -15,6 +15,7 @@
 import { mapGetters, mapActions } from 'vuex';
 import { ipcRenderer } from 'electron';
 import { AlbumServiceImpl } from '../../main/service/AlbumServiceImpl.ts';
+import SettingService from '../../../core/service/SettingService.ts';
 import * as tags from '../assets/tags.js';
 const { dialog } = require('electron').remote;
 
@@ -40,6 +41,10 @@ export default {
         this.initMsgListener();
     },
 
+    beforeDestroy() {
+        this.removeDrop();
+    },
+
     computed: {
         ...mapGetters(['string'])
     },
@@ -54,22 +59,16 @@ export default {
         },
 
         initDrop() {
-            let blockedCb = e => {
-                e.preventDefault();
-                e.stopPropagation();
-            };
-            this.$refs.home.addEventListener('dragenter', blockedCb, false);
-            this.$refs.home.addEventListener('dragover', blockedCb, false);
-            this.$refs.home.addEventListener('dragleave', blockedCb, false);
-            this.$refs.home.addEventListener(
-                'drop',
-                e => {
-                    // 阻止默认动作（如打开一些元素的链接）
-                    event.preventDefault();
-                    ipcRenderer.send('SELECT_ALBUM_DIR', event.dataTransfer.files[0].path);
-                },
-                false
-            );
+            this.$refs.home.addEventListener('drop', this.listenDrop, false);
+        },
+
+        removeDrop() {
+            this.$refs.home.removeEventListener('drop', this.listenDrop, false);
+        },
+
+        listenDrop(e) {
+            event.preventDefault();
+            ipcRenderer.send('SELECT_ALBUM_DIR', event.dataTransfer.files[0].path);
         },
 
         initMsgListener() {
@@ -101,6 +100,7 @@ export default {
         selectLang(langCode) {
             window.localStorage.setItem('lang', langCode);
             this.setString(langCode);
+            SettingService.setLang(langCode);
         }
     }
 };
@@ -136,7 +136,6 @@ body {
             font-weight: bold;
         }
         .button {
-            transition: all 0.2s ease;
             color: #eee;
             font-size: 14px;
             text-align: center;

@@ -1,6 +1,6 @@
 {
     "name": "ehunter_local",
-    "version": "0.0.1",
+    "version": "1.0.0",
     "author": "Alex Chen <c360785655@gmail.com>",
     "description": "ehunter",
     "license": null,
@@ -19,7 +19,7 @@
         "postinstall": ""
     },
     "build": {
-        "productName": "ehunter_local",
+        "productName": "eHunter-local",
         "appId": "info.alexskye.ehunter",
         "directories": {
             "output": "build"

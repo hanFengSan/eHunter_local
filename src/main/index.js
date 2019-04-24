@@ -33,6 +33,7 @@ function createWindow() {
      * Initial window options
      */
     mainWindow = new BrowserWindow({
+        title: 'eHunter-local',
         height: 563,
         useContentSize: true,
         width: 1000,

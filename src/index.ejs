@@ -2,11 +2,21 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>ehunter_local</title>
+    <title>eHunter-local</title>
     <% if (htmlWebpackPlugin.options.nodeModules) { %>
       <!-- Add `node_modules/` to global paths so `require` works properly in development -->
       <script>
         require('module').globalPaths.push('<%= htmlWebpackPlugin.options.nodeModules.replace(/\\/g, '\\\\') %>')
+      </script>
+      <script>
+          function blockDrop(e) {
+            e.preventDefault();
+            e.stopPropagation();
+          }
+          document.addEventListener('dragenter', blockDrop, false);
+          document.addEventListener('dragover', blockDrop, false);
+          document.addEventListener('dragleave', blockDrop, false);
+          document.addEventListener('drop', blockDrop, false);
       </script>
     <% } %>
   </head>

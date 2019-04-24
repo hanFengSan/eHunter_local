@@ -35,7 +35,6 @@ export default {
                 .instance()
         );
     },
-
     methods: {
         showReader(show) {
             if (!show) {
