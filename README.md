@@ -1,6 +1,16 @@
-# ehunter_local
+# eHunter_local
+eHunter_local is local version of [eHunter](https://github.com/hanFengSan/eHunter),supporting for Windows and MacOS. It's a lightweight image reader for reading manga.
 
-> ehunter
+#### Preview
+![avatar](https://github.com/hanFengSan/eHunter_local/blob/master/github_image/001.png?raw=true)
+
+![avatar](https://github.com/hanFengSan/eHunter_local/blob/master/github_image/002.png?raw=true)
+
+![avatar](https://github.com/hanFengSan/eHunter_local/blob/master/github_image/003.png?raw=true)
+
+#### Download
+[Github Release](https://github.com/hanFengSan/eHunter_local/releases)
+[百度网盘](https://pan.baidu.com/s/1wEnBe9uGoBKzNd4DCfbuAg) 提取码: czft
 
 #### Build Setup
 
