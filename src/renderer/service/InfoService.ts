@@ -1,7 +1,7 @@
 import store from '../store'
 import DialogBean from '../bean/DialogBean'
 import { DialogOperation, DOClick } from '../bean/DialogOperation'
-import * as tags from '../assets/value/tags'
+import * as tags from '../assets/value/tags.js'
 import { TextReq } from '../service/request/TextReq'
 import ServerMessage from '../bean/ServerMessage'
 import SettingService from '../service/SettingService'

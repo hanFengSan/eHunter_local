@@ -18,7 +18,7 @@ class SettingService {
             albumWidth: { eventName: 'setAlbumWidth', val: 80 }, // eventName is action name of vuex
             toggleEHunter: { val: true },
             toggleThumbView: { eventName: 'toggleThumbView', val: true },
-            loadNum: { eventName: 'setLoadNum', val: 3 },
+            loadNum: { eventName: 'setLoadNum', val: 20 },
             volumeSize: { eventName: 'setVolumeSize', val: 50 },
             showBookScreenAnimation: { eventName: 'setBookScreenAnimation', val: false },
             showBookPagination: { eventName: 'setBookPagination', val: true },

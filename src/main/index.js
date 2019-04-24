@@ -13,8 +13,6 @@ import {
     AlbumServiceImpl
 } from './service/AlbumServiceImpl.ts'
 
-import '../renderer/store'
-
 /**
  * Set `__static` path to static files in production
  * https://simulatedgreg.gitbooks.io/electron-vue/content/en/using-static-assets.html
@@ -34,11 +32,12 @@ function createWindow() {
      */
     mainWindow = new BrowserWindow({
         title: 'eHunter-local',
-        height: 563,
+        height: 763,
         useContentSize: true,
-        width: 1000,
+        width: 1200,
         minWidth: 400,
         minHeight: 300,
+        backgroundColor: '#333333',
         webPreferences: {
             webSecurity: false
         }

@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import DialogBean from '../../bean/DialogBean';
+import DialogBean from '../../bean/DialogBean.ts';
 import FlatButton from './FlatButton.vue';
 import MdRenderer from '../../utils/MdRenderer';
 import * as tags from '../../assets/value/tags';
@@ -30,7 +30,7 @@ export default {
 
     props: {
         data: {
-            type: DialogBean
+            type: Object
         }
     },
 

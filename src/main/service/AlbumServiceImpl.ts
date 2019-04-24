@@ -1,7 +1,7 @@
-import { AlbumService, PreviewThumbnailStyle } from '../../../core/service/AlbumService'
+import { AlbumService, PreviewThumbnailStyle } from '../../renderer/service/AlbumService';
 import { FileItem } from '../bean/FileItem';
-import { ImgPageInfo } from '../../../core/bean/ImgPageInfo';
-import { ThumbInfo, ThumbMode } from '../../../core/bean/ThumbInfo';
+import { ImgPageInfo } from '../../renderer/bean/ImgPageInfo';
+import { ThumbInfo, ThumbMode } from  '../../renderer/bean/ThumbInfo';
 
 const util = require('util');
 const fs = require('fs');

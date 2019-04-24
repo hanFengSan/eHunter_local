@@ -14,9 +14,9 @@
 <script>
 import { mapGetters, mapActions } from 'vuex';
 import { ipcRenderer } from 'electron';
-import { AlbumServiceImpl } from '../../main/service/AlbumServiceImpl.ts';
-import SettingService from '../../../core/service/SettingService.ts';
-import * as tags from '../assets/tags.js';
+import { AlbumServiceImpl } from '../main/service/AlbumServiceImpl.ts';
+import SettingService from './service/SettingService.ts';
+import * as tags from './assets/value/tags.js';
 const { dialog } = require('electron').remote;
 
 export default {
@@ -32,8 +32,8 @@ export default {
         };
     },
 
-    created() {
-        this.initLang();
+    beforeCreate() {
+        SettingService.initSettings();
     },
 
     mounted() {
@@ -73,7 +73,7 @@ export default {
 
         initMsgListener() {
             ipcRenderer.on('ALBUM_DATA', async (event, data) => {
-                this.$router.push({ name: 'Reader', params: { albumData: data } });
+                this.$router.push({ name: 'CoreApp', params: { albumData: data } });
             });
             ipcRenderer.on('ERROR', (event, msg) => {
                 console.log(this.string.noDir);
@@ -90,30 +90,12 @@ export default {
             });
         },
 
-        initLang() {
-            let langCode = window.localStorage.getItem('lang');
-            if (langCode) {
-                this.setString(langCode);
-            }
-        },
-
         selectLang(langCode) {
-            window.localStorage.setItem('lang', langCode);
-            this.setString(langCode);
             SettingService.setLang(langCode);
         }
     }
 };
 </script>
-
-<style>
-body {
-    margin: 0;
-    background: #333333;
-    font-family: PingFang SC, Microsoft YaHei, 微软雅黑, Arial, Hiragino Sans GB, Heiti SC, Droid Sans,
-        WenQuanYi Micro Hei, sans-serif !important;
-}
-</style>
 
 <style lang="scss" scoped>
 .home {

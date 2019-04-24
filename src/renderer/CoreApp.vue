@@ -1,17 +1,17 @@
 <template>
-  <div class="app normalize">
+  <div class="app normalize vue-container">
     <transition name="slow-horizontal-fade" v-if="!disableLoading">
       <loading-view v-if="!isDone && !isFailed" class="loading-view"></loading-view>
     </transition>
     <transition name="slow-horizontal-fade">
-        <div class="failed-view" v-if="isFailed">
-            <h4>{{ string.loadingFailedAndRefresh }}</h4>
-            <article>
-                <p>{{ string.failedMsg }}: {{ failedMsg }}</p>
-                <p>{{ string.version}}: {{ config.version }}</p>
-                <p>{{ string.ContractAuthor}}: Create issue on {{ config.homePage }} or email {{ config.email }}</p>
-            </article>
-        </div>
+      <div class="failed-view" v-if="isFailed">
+        <h4>{{ string.loadingFailedAndRefresh }}</h4>
+        <article>
+          <p>{{ string.failedMsg }}: {{ failedMsg }}</p>
+          <p>{{ string.version}}: {{ config.version }}</p>
+          <p>{{ string.ContractAuthor}}: Create issue on {{ config.homePage }} or email {{ config.email }}</p>
+        </article>
+      </div>
     </transition>
     <template v-if="isDone">
       <transition name="slow-horizontal-fade">
@@ -48,11 +48,11 @@ import SettingService from './service/SettingService.ts';
 import InfoService from './service/InfoService.ts';
 import * as tags from './assets/value/tags';
 import Utils from './utils/Utils.ts';
+import { AlbumServiceImpl } from '../main/service/AlbumServiceImpl.ts';
+import config from '../config.js';
 
 export default {
-    name: 'InjectedApp',
-
-    inject: ['config', 'service', 'disableLoading'],
+    name: 'CoreApp',
 
     components: {
         ThumbScrollView,
@@ -62,7 +62,17 @@ export default {
     },
 
     data() {
+        let service = {
+            album: AlbumServiceImpl.fromJSON(this.$route.params.albumData),
+            eHunter: {
+                showEHunterView: () => this.$router.go(-1)
+            }
+        };
+        console.log(service.album);
         return {
+            service,
+            config,
+            disableLoading: true,
             pageCount: 0,
             curPageNum: 0,
             title: '',
@@ -76,6 +86,20 @@ export default {
         };
     },
 
+    provide() {
+        return {
+            config: this.config,
+            service: this.service,
+            disableLoading: this.disableLoading
+        };
+    },
+
+    beforeCreate() {
+        if (!this.$route.params.albumData) {
+            this.$router.go(-1);
+        }
+    },
+
     async created() {
         Promise.all([
             this.service.album.getPageCount(),
@@ -84,20 +108,23 @@ export default {
             this.service.album.getImgPageInfos(),
             this.service.album.getThumbInfos(),
             this.service.album.getAlbumId()
-        ]).then(async values => {
-            this.pageCount = values[0];
-            this.curPageNum = values[1];
-            this.title = values[2];
-            this.imgPageInfos = values[3];
-            this.thumbInfos = values[4];
-            this.albumId = values[5];
-            this.supportThumbView = this.service.album.supportThumbView();
-            this.isDone = true;
-        }, reason => {
-            console.error('[Ehunter init error]', reason);
-            this.failedMsg = reason;
-            this.isFailed = true;
-        });
+        ]).then(
+            async values => {
+                this.pageCount = values[0];
+                this.curPageNum = values[1];
+                this.title = values[2];
+                this.imgPageInfos = values[3];
+                this.thumbInfos = values[4];
+                this.albumId = values[5];
+                this.supportThumbView = this.service.album.supportThumbView();
+                this.isDone = true;
+            },
+            reason => {
+                console.error('[Ehunter init error]', reason);
+                this.failedMsg = reason;
+                this.isFailed = true;
+            }
+        );
         await this.checkInstructions();
         this.checkVersion();
     },
@@ -155,7 +182,8 @@ $general_animtation_time: 0.2s;
     font-family: PingFang SC, Microsoft YaHei, 微软雅黑, Arial, Hiragino Sans GB, Heiti SC, Droid Sans,
         WenQuanYi Micro Hei, sans-serif !important;
     display: flex;
-    height: 100%;
+    height: 100vh;
+    overflow: hidden;
     text-align: initial; // overlay original style
     > .loading-view {
         position: absolute;
@@ -181,7 +209,7 @@ $general_animtation_time: 0.2s;
         > article {
             > p {
                 font-size: 12px;
-                color: #EEEEEE;
+                color: #eeeeee;
                 font-size: 12px;
             }
         }

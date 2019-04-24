@@ -82,14 +82,14 @@ export default {
 
     async created() {
         this.appSize = this.getAppSize();
-        window.addEventListener('resize', this.watchResize);
-        document.addEventListener('keydown', this.watchKeyboard);
+        window.addEventListener('resize', this.watchResize, false);
+        document.addEventListener('keydown', this.watchKeyboard, false);
         this.checkInstructions();
     },
 
     beforeDestroy() {
-        window.removeEventListener('resize', this.watchResize);
-        document.removeEventListener('keydown', this.watchKeyboard);
+        window.removeEventListener('resize', this.watchResize, false);
+        document.removeEventListener('keydown', this.watchKeyboard, false);
         if (this.autoFlip) {
             this.stopAutoFlip();
             this.setAutoFlip(false);

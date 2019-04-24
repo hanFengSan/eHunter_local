@@ -104,8 +104,7 @@ export default {
     methods: {
         ...mapActions(['setIndex']),
         fullscreen() {
-            // hack for crossing chrome and firefox
-            const elem = document.querySelector('.vue-container');
+            const elem = document.firstElementChild;
             if (document.webkitCurrentFullScreenElement || document.mozFullScreenElement) {
                 document.webkitExitFullscreen ? document.webkitExitFullscreen() : '';
                 document.mozCancelFullScreen ? document.mozCancelFullScreen() : '';

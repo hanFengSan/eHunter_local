@@ -1,12 +1,13 @@
 <template>
   <div class="reader vue-container">
-    <div id="ehunter-reader-app"></div>
+    <app></app>
   </div>
 </template>
 
 <script>
 import { ipcRenderer } from 'electron';
 import { AlbumServiceImpl } from '../../main/service/AlbumServiceImpl.ts';
+import app from '../../../core/app';
 import core from '../../../core';
 import config from '../../config.js';
 const { dialog } = require('electron').remote;
@@ -14,27 +15,30 @@ const { dialog } = require('electron').remote;
 export default {
     name: 'Reader',
     data() {
-        return {};
+        let  service = AlbumServiceImpl.fromJSON(this.$route.params.albumData);
+        console.log(service);
+        return {
+            service: {
+                album: AlbumServiceImpl.fromJSON(this.$route.params.albumData),
+                eHunter: {
+                    showEHunterView: () => this.$router.go(-1)
+                }
+            }
+        };
     },
 
-    async mounted() {
-        if (!this.$route.params.albumData) {
-            this.showReader(false);
-        }
-        let albumService = AlbumServiceImpl.fromJSON(this.$route.params.albumData);
-        core.createAppView(
-            'vue-container',
-            '#ehunter-reader-app',
-            core.launcher
-                .setAlbumService(albumService)
-                .setEHunterService({
-                    showEHunterView: this.showReader.bind(this)
-                })
-                .disableLoading(true)
-                .setConfig(config)
-                .instance()
-        );
+    created() {},
+
+    provide() {
+        return {
+            service: this.service,
+            config,
+            disableLoading: true
+        };
     },
+
+    components: { app },
+
     methods: {
         showReader(show) {
             if (!show) {
@@ -52,7 +56,5 @@ export default {
     position: fixed;
     height: 100%;
     width: 100%;
-    #ehunter-reader-app {
-    }
 }
 </style>

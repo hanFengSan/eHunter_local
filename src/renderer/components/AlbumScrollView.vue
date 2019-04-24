@@ -92,11 +92,11 @@ export default {
 
     async created() {
         setTimeout(() => this.setIndex({ val: this.curIndex.val, updater: tags.SCROLL_VIEW_VOL }), 200);
-        document.addEventListener('keydown', this.watchKeyboard);
+        document.addEventListener('keydown', this.watchKeyboard, false);
     },
 
-    destroyed() {
-        document.removeEventListener('keydown', this.watchKeyboard);
+    beforeDestroy() {
+        document.removeEventListener('keydown', this.watchKeyboard, false);
     },
 
     computed: {
@@ -144,6 +144,9 @@ export default {
                         this.$refs.scrollView.ScrollTo(0, 1000);
                     } else {
                         await this.$nextTick();
+                        if (this.curIndex.val < 0) {
+                            return;
+                        }
                         this.$refs.scrollView.ScrollTo(
                             this.$refs.pageContainers[this.volIndex(this.curIndex.val)].offsetTop - 100,
                             1000
