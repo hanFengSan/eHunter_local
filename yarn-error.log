@@ -1,30 +1,21 @@
 Arguments: 
-  /usr/local/Cellar/node/11.10.0/bin/node /usr/local/Cellar/yarn/1.13.0/libexec/bin/yarn.js add CSS.escape
+  /usr/local/Cellar/node/12.4.0/bin/node /usr/local/Cellar/yarn/1.17.0/libexec/bin/yarn.js
 
 PATH: 
   /Library/Java/JavaVirtualMachines/jdk1.8.0_111.jdk/Contents/Home/bin:/Users/Yakami/Desktop/YakamiStudio/java/tools/apache-maven-3.3.9/bin:/Library/Frameworks/Python.framework/Versions/3.5/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/Yakami/YakamiStudio/Python/CaptureTest:/usr/local/share/dotnet:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Users/Yakami/Library/Android/sdk/tools:/Users/Yakami/Library/Android/sdk/platform-tools:/usr/local/Cellar/node/9.8.0/bin:/usr/local/Cellar/node/9.8.0/libexec/bin
 
 Yarn version: 
-  1.13.0
+  1.17.0
 
 Node version: 
-  11.10.0
+  12.4.0
 
 Platform: 
   darwin x64
 
 Trace: 
-  Error: https://registry.npm.taobao.org/CSS.escape: Not found
-      at Request.params.callback [as _callback] (/usr/local/Cellar/yarn/1.13.0/libexec/lib/cli.js:66255:18)
-      at Request.self.callback (/usr/local/Cellar/yarn/1.13.0/libexec/lib/cli.js:129397:22)
-      at Request.emit (events.js:197:13)
-      at Request.<anonymous> (/usr/local/Cellar/yarn/1.13.0/libexec/lib/cli.js:130369:10)
-      at Request.emit (events.js:197:13)
-      at IncomingMessage.<anonymous> (/usr/local/Cellar/yarn/1.13.0/libexec/lib/cli.js:130291:12)
-      at Object.onceWrapper (events.js:285:13)
-      at IncomingMessage.emit (events.js:202:15)
-      at endReadableNT (_stream_readable.js:1129:12)
-      at processTicksAndRejections (internal/process/next_tick.js:76:17)
+  Error: http://registry.npm.taobao.org/typescript/download/typescript-3.4.4.tgz: unexpected end of file
+      at Zlib.zlibOnError [as onerror] (zlib.js:168:17)
 
 npm manifest: 
   {
@@ -32,7 +23,7 @@ npm manifest:
       "version": "1.0.0",
       "author": "Alex Chen <c360785655@gmail.com>",
       "description": "ehunter",
-      "license": null,
+      "license": "MIT",
       "main": "./dist/electron/main.js",
       "scripts": {
           "build": "node .electron-vue/build.js && electron-builder",
@@ -85,6 +76,7 @@ npm manifest:
       "dependencies": {
           "@babel/polyfill": "^7.4.3",
           "axios": "^0.18.0",
+          "css.escape": "^1.5.1",
           "file-url": "^3.0.0",
           "image-size": "^0.7.3",
           "markdown-it": "^8.4.2",
@@ -136,8 +128,8 @@ npm manifest:
           "mocha": "^5.2.0",
           "multispinner": "^0.2.1",
           "node-loader": "^0.6.0",
-          "node-sass": "^4.9.2",
-          "sass-loader": "^7.0.3",
+          "node-sass": "^4.12.0",
+          "sass-loader": "^7.1.0",
           "style-loader": "^0.21.0",
           "url-loader": "^1.0.1",
           "vue-html-loader": "^1.2.4",
@@ -3034,6 +3026,11 @@ Lockfile:
     version "2.1.3"
     resolved "http://registry.npm.taobao.org/css-what/download/css-what-2.1.3.tgz#a6d7604573365fe74686c3f311c56513d88285f2"
     integrity sha1-ptdgRXM2X+dGhsPzEcVlE9iChfI=
+  
+  css.escape@^1.5.1:
+    version "1.5.1"
+    resolved "https://registry.npm.taobao.org/css.escape/download/css.escape-1.5.1.tgz#42e27d4fa04ae32f931a4b4d4191fa9cddee97cb"
+    integrity sha1-QuJ9T6BK4y+TGktNQZH6nN3ul8s=
   
   cssesc@^0.1.0:
     version "0.1.0"
