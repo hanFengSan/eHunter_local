@@ -84,12 +84,14 @@ export default {
         this.appSize = this.getAppSize();
         window.addEventListener('resize', this.watchResize, false);
         document.addEventListener('keydown', this.watchKeyboard, false);
+        document.addEventListener('wheel', this.watchWheel);
         this.checkInstructions();
     },
 
     beforeDestroy() {
         window.removeEventListener('resize', this.watchResize, false);
         document.removeEventListener('keydown', this.watchKeyboard, false);
+        document.removeEventListener('wheel', this.watchWheel);
         if (this.autoFlip) {
             this.stopAutoFlip();
             this.setAutoFlip(false);
@@ -111,7 +113,9 @@ export default {
             autoFlipFrequency: 'autoFlipFrequency',
             showMoreSettings: 'showMoreSettings',
             showThumbViewInBook: 'showThumbViewInBook',
-            thumbWidth: 'thumbWidth'
+            thumbWidth: 'thumbWidth',
+            wheelDirection: 'wheelDirection',
+            wheelSensitivity: 'wheelSensitivity'
         }),
         tags: () => tags,
         screenSize() {
@@ -248,6 +252,27 @@ export default {
                 case 'Q':
                     this.$router.go(-1);
                     break;
+            }
+        },
+
+        watchWheel(e) {
+            if (e.metaKey || e.ctrlKey || e.wheelDeltaY === 0) {
+                return;
+            }
+            const wheelDeltaKey = e.wheelDeltaY > 0 ? '_wheelDeltaYUp' : '_wheelDeltaYDown';
+            const wheelDeltaTimerKey = e.wheelDeltaY > 0 ? '_wheelDeltaYUpTimer' : '_wheelDeltaYDownTimer';
+            let action = e.wheelDeltaY > 0 ? this.prevPage : this.nextPage;
+            if (this.wheelDirection) {
+                action = e.wheelDeltaY > 0 ? this.nextPage : this.prevPage;
+            }
+            this[wheelDeltaKey] += Math.abs(e.wheelDeltaY);
+            window.clearTimeout(this[wheelDeltaTimerKey]);
+            this[wheelDeltaTimerKey] = window.setTimeout(() => {
+                this[wheelDeltaKey] = 0;
+            }, 100);
+            if (this[wheelDeltaKey] > this.wheelSensitivity) {
+                this[wheelDeltaKey] = 0;
+                action();
             }
         },
 

@@ -338,5 +338,35 @@ export default {
         cn: '联系作者',
         en: 'Contact author',
         jp: '作者に連絡する'
+    },
+    wheelSensitivity: {
+      cn: '滚轮翻页',
+      en: 'Wheel flip',
+      jp: 'ホイール'
+    },
+    wheelSensitivityTip: {
+      cn: '鼠标滚轮翻页灵敏度',
+      en: 'Wheel sensitivity',
+      jp: 'ホイール感度'
+    },
+    wheelDirection: {
+        cn: '滚轮方向',
+        en: 'Wheel Direction',
+        jp: 'ホイール方向'
+    },
+    wheelDirectionTip: {
+        cn: '反转滚轮翻页方向',
+        en: 'Reverse Wheel Direction to flip',
+        jp: 'リバースホイール方向'
+    },
+    tips: {
+      cn: '提示',
+      en: 'TIPS',
+      jp: 'ヒント'
+    },
+    numberInputTip: {
+      cn: '最小值为`{{min}}`, 最大值为`{{max}}`',
+      en: 'The minimum is `{{min}}` and the maximum is `{{max}}`',
+      jp: '最小は`{{min}}`, 最大は`{{max}}`です'
     }
 }
