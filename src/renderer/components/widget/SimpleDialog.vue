@@ -1,5 +1,5 @@
 <template>
-<div class="simple-dialog">
+<div ref="dialog" class="simple-dialog" @click.stop="" @wheel.stop="">
     <div class="background" @click="close"></div>
     <article>
         <h4>{{ data.title }}</h4>
@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import DialogBean from '../../bean/DialogBean.ts';
+import DialogBean from '../../bean/DialogBean';
 import FlatButton from './FlatButton.vue';
 import MdRenderer from '../../utils/MdRenderer';
 import * as tags from '../../assets/value/tags';
@@ -30,8 +30,18 @@ export default {
 
     props: {
         data: {
-            type: Object
+            type: DialogBean
         }
+    },
+
+    mounted() {
+      setTimeout(() => {
+        document.addEventListener('keydown', this.enter);
+      }, 500);
+    },
+
+    beforeDestroy() {
+      document.removeEventListener('keydown', this.enter);
     },
 
     components: { FlatButton },
@@ -41,7 +51,7 @@ export default {
             MdRenderer
         };
     },
-
+  
     methods: {
         getType(tag) {
             switch (tag) {
@@ -64,6 +74,12 @@ export default {
             if (this.data.type === tags.DIALOG_NORMAL) {
                 this.$emit('close');
             }
+        },
+        enter(e) {
+          if (e.key === 'Enter' && this.data.operations.length === 1) {
+            this.data.operations[0].onClick();
+            this.$emit('close');
+          }
         }
     }
 };
