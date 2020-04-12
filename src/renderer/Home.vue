@@ -2,7 +2,10 @@
   <div ref="home" class="home">
     <div class="content">
       <h1>{{ string.dropDir }}</h1>
-      <a class="button" @click="selectAlbumDir">{{ string.openDir }}</a>
+      <div class="btns">
+        <a class="button" @click="selectAlbumDir">{{ string.openDir }}</a>
+        <!-- <a class="button deep" @click="openHome">浏览HOME</a> -->
+      </div>
     </div>
     <div class="ehunter-tag">EHUNTER</div>
     <ul class="lang-selector">
@@ -58,6 +61,16 @@ export default {
             if (openDirectory) {
                 let dir = openDirectory[0];
                 ipcRenderer.send('SELECT_ALBUM_DIR', dir);
+            }
+        },
+
+        openHome() {
+            let openDirectory = dialog.showOpenDialog({
+                properties: ['openDirectory']
+            });
+            if (openDirectory) {
+                let dir = openDirectory[0];
+                ipcRenderer.send('OPEN_HOME', dir);
             }
         },
 
@@ -123,6 +136,13 @@ export default {
             font-size: 24px;
             font-weight: bold;
         }
+        .btns {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: row;
+            margin-bottom: 50px;
+        }
         .button {
             color: #eee;
             font-size: 14px;
@@ -150,11 +170,14 @@ export default {
             text-align: center;
             border: none;
             padding: 0 10px;
+            &.deep {
+                background-color: rgba(255,255,255,0.3);
+            }
             &:hover {
                 background-color: hsl(122, 39, 57);
             }
             &:active {
-                background-color: hsl(122, 39, 44);
+                background-color: hsl(122, 39, 45);
             }
         }
     }

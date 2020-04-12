@@ -81,6 +81,17 @@ ipcMain.on('SELECT_ALBUM_DIR', async (event, path) => {
     }
 });
 
+ipcMain.on('OPEN_HOME', async (event, path) => {
+    try {
+        let fileItems = await (new AlbumDirSorter(path)).sort();
+        let albumServiceImpl = new AlbumServiceImpl();
+        await albumServiceImpl.parseFileItems(path, fileItems);
+        event.sender.send('ALBUM_DATA', albumServiceImpl);
+    } catch (err) {
+        event.sender.send('ERROR', err.message);
+    }
+});
+
 /**
  * Auto Updater
  *
