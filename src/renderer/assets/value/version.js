@@ -10,18 +10,18 @@ export default {
 `,
     en: `
 * In \`Book\` mode, you can switch the \`Odd/Even\` to see the big image that crossing screens.
-* Support using \`Enter\` key to close dialog.
+* Support using \`Enter\` key to close the dialog.
 * In \`Scroll\` mode, you can change the space between pages.
-* Support manually change the value of configuration.
+* Support manually change the value of the configuration.
 * Support mouse wheel to flip pages in \`Book\` mode.
-* Add \`Wheel Direction\` for customize the direction of flipping.
+* Add \`Wheel Direction\` for customizing the direction of flipping.
 `,
     jp: `
 * In \`Book\` mode, you can switch the \`Odd/Even\` to see the big image that crossing screens.
-* Support using \`Enter\` key to close dialog.
+* Support using \`Enter\` key to close the dialog.
 * In \`Scroll\` mode, you can change the space between pages.
-* Support manually change the value of configuration.
+* Support manually change the value of the configuration.
 * Support mouse wheel to flip pages in \`Book\` mode.
-* Add \`Wheel Direction\` for customize the direction of flipping.
+* Add \`Wheel Direction\` for customizing the direction of flipping.
 `
 }
