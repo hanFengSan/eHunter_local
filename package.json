@@ -1,6 +1,6 @@
 {
     "name": "ehunter_local",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "author": "Alex Chen <c360785655@gmail.com>",
     "description": "ehunter",
     "license": "MIT",
@@ -90,7 +90,7 @@
         "del": "^3.0.0",
         "devtron": "^1.4.0",
         "electron": "^2.0.4",
-        "electron-builder": "^20.19.2",
+        "electron-builder": "^21.2.0",
         "electron-debug": "^1.5.0",
         "electron-devtools-installer": "^2.2.4",
         "file-loader": "^1.1.11",

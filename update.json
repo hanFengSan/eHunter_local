@@ -1,79 +1,47 @@
 {
     "cn":{
-        "title":"新版本: v1.0.0",
-        "version":"1.0.0",
-        "text":"local版本发布",
+        "title":"新版本: v1.1.0",
+        "version":"1.1.0",
+        "text":"自动翻页&手动输入设置&奇偶页切换等功能更新",
         "time":1543811938814,
         "duration":604800000,
         "always":true,
         "operations":[
             {
-                "name":"Chrome应用商店",
-                "url":"https://chrome.google.com/webstore/detail/ehunter-more-powerful-e-h/dnnicnedpmjkbkdeijccbjkkcpcbmdoo"
+                "name": "百度云下载",
+                "url": ""
             },
             {
-                "name":"油猴",
-                "url":"https://greasyfork.org/zh-CN/scripts/39198-ehunter"
-            },
-            {
-                "name":"Firefox",
-                "url":"https://addons.mozilla.org/zh-CN/firefox/addon/ehunter/"
-            },
-            {
-                "name":"crx/xpi下载",
-                "url":"https://pan.baidu.com/s/1YTONumJwAAHMPpUfcyqkhg"
+                "name":"Github下载",
+                "url":"https://github.com/hanFengSan/eHunter_local/releases"
             }
         ]
     },
     "en":{
-        "title":"New version: v2.3.1",
-        "version":"1.0.0",
-        "text":"Fix bugs",
+        "title":"New version: v1.1.0",
+        "version":"1.1.0",
+        "text":"Multiple features updated",
         "time":1543811938814,
         "duration":604800000,
         "always":true,
         "operations":[
             {
-                "name":"Chrome Web Store",
-                "url":"https://chrome.google.com/webstore/detail/ehunter-more-powerful-e-h/dnnicnedpmjkbkdeijccbjkkcpcbmdoo"
-            },
-            {
-                "name":"Tampermonkey",
-                "url":"https://greasyfork.org/zh-CN/scripts/39198-ehunter"
-            },
-            {
-                "name":"Firefox",
-                "url":"https://addons.mozilla.org/zh-CN/firefox/addon/ehunter/"
-            },
-            {
-                "name":"crx/xpi download",
-                "url":"https://pan.baidu.com/s/1YTONumJwAAHMPpUfcyqkhg"
+                "name":"Github下载",
+                "url":"https://github.com/hanFengSan/eHunter_local/releases"
             }
         ]
     },
     "jp":{
-        "title":"新しいバージョン: v2.3.1",
-        "version":"1.0.0",
-        "text":"Fix bugs",
+        "title":"新しいバージョン: v1.1.0",
+        "version":"1.1.0",
+        "text":"Multiple features updated",
         "time":1543811938814,
         "duration":604800000,
         "always":true,
         "operations":[
             {
-                "name":"Chrome Web Store",
-                "url":"https://chrome.google.com/webstore/detail/ehunter-more-powerful-e-h/dnnicnedpmjkbkdeijccbjkkcpcbmdoo"
-            },
-            {
-                "name":"Tampermonkey",
-                "url":"https://greasyfork.org/zh-CN/scripts/39198-ehunter"
-            },
-            {
-                "name":"Firefox",
-                "url":"https://addons.mozilla.org/zh-CN/firefox/addon/ehunter/"
-            },
-            {
-                "name":"crx/xpi downloadダウンロード",
-                "url":"https://pan.baidu.com/s/1YTONumJwAAHMPpUfcyqkhg"
+                "name":"Github下载",
+                "url":"https://github.com/hanFengSan/eHunter_local/releases"
             }
         ]
     }
