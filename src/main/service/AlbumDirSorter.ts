@@ -23,7 +23,10 @@ export class AlbumDirSorter {
         let fileItems = await this.getImgsFromDir();
         if (fileItems.length === 0)
             throw new Error('NO_IMG');
-        fileItems = this.sortByNum(fileItems);
+        var collator = new Intl.Collator(undefined, { numeric: true, sensitivity: 'base' });
+        fileItems.sort((a, b) => {
+            return collator.compare(a.name, b.name);
+        });
         return fileItems;
     }
 
@@ -41,37 +44,5 @@ export class AlbumDirSorter {
             }
         })
         return fileItems;
-    }
-
-    private sortByNum(fileItems: Array<FileItem>): Array<FileItem> {
-        let numTailList: Array<FileItem> = [];
-        let numHeadList: Array<FileItem> = [];
-        let otherList: Array<FileItem> = [];
-        fileItems.forEach(i => {
-            if (/^.*?\d+?(\.jpg|\.png)$/i.test(i.name)) {
-                numTailList.push(i);
-            } else if (/^\d+?.*?(\.jpg|\.png)$/i.test(i.name)) {
-                numHeadList.push(i);
-            } else {
-                otherList.push(i);
-            }
-        });
-        numTailList.sort((a, b) => {
-            let reg = /^.*?(\d+?)(\.jpg|\.png)$/i;
-            a.name.match(reg)
-            let num1 = Number(RegExp.$1);
-            b.name.match(reg)
-            let num2 = Number(RegExp.$1);
-            return num1 - num2;
-        });
-        numHeadList.sort((a, b) => {
-            let reg = /^(\d+?).*?(\.jpg|\.png)$/i;
-            a.name.match(reg)
-            let num1 = Number(RegExp.$1);
-            b.name.match(reg)
-            let num2 = Number(RegExp.$1);
-            return num1 - num2;
-        });
-        return numTailList.concat(numHeadList, otherList);
     }
 }
