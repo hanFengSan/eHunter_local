@@ -55,7 +55,7 @@
     },
     "dependencies": {
         "@babel/polyfill": "^7.4.3",
-        "axios": "^0.18.0",
+        "axios": "^0.21.1",
         "css.escape": "^1.5.1",
         "file-url": "^3.0.0",
         "image-size": "^0.7.3",
